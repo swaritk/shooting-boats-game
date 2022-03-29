@@ -10,6 +10,7 @@ var boats = [];
 var score = 0;
 var boatAnimation = [];
 var boatSpritedata, boatSpritesheet;
+var boat_wateranimation = false
 
 var brokenBoatAnimation = [];
 var brokenBoatSpritedata, brokenBoatSpritesheet;
@@ -114,12 +115,14 @@ function collisionWithBoat(index) {
     if (balls[index] !== undefined && boats[i] !== undefined) {
       var collision = Matter.SAT.collides(balls[index].body, boats[i].body);
 
-      if (collision.collided) {
+      if (collision.collided&&boat_wateranimation !== true) {
           boats[i].remove(i);
-        
+          
 
         Matter.World.remove(world, balls[index].body);
         delete balls[index];
+      } else{
+        boat_wateranimation = false;
       }
     }
   }
@@ -141,6 +144,7 @@ function showCannonBalls(ball, index) {
     if (ball.body.position.x >= width || ball.body.position.y >= height - 50) {
       if(!ball.isSink )  {
         ball.remove(index);
+        boat_wateranimation = true;
        } 
     }
   }
