@@ -76,7 +76,7 @@ function setup() {
 function draw() {
   background(189);
   image(backgroundImg, 0, 0, width, height);
-
+  backgroundMusic.play();
   if(backgroundMusic.isPlaying()){
     backgroundMusic.play();
     backgroundMusic.setVolume(0.1);
